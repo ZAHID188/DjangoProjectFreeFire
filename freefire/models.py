@@ -22,6 +22,7 @@ class Matches(models.Model):
     ammu=models.CharField(max_length=20, choices=ammuchoice ,default="Limited")
     time=models.CharField(max_length=20, choices=gametime ,default="00PM")
     entryfee=models.FloatField(choices=entryfeechoice,default=15.0)
+    #matchnumber=models.IntegerField()
     
     
    
