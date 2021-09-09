@@ -38,6 +38,6 @@ class playerInfo(models.Model):
     game_id=models.IntegerField()
 
     def __str__(self):
-        return self.player_name
+        return self.player_name 
 
 
