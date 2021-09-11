@@ -23,3 +23,64 @@ class PlayerDetailView(DetailView):
     template_name="freefire/player_detail_list.html"
 
 
+
+            # Let's create API
+
+
+from django.http import JsonResponse, request,response
+
+
+def matchlistapi(request):
+    matches=Matches.objects.all()
+    data={"matches are ":list(matches.values())}
+    response=JsonResponse(data)
+    return response
+
+def matchdetailsapi(request,pk):
+    try:
+        matchdetail=Matches.objects.get(pk=pk)
+        data={"match detail":{
+            "match Id":matchdetail.Matchid,
+            "match mood":matchdetail.GameMood,
+
+        }}
+        response=JsonResponse(data)
+    except Matches.DoesNotExist:
+        response=JsonResponse({"error":{"data is not valid":404}},status=404)
+    
+    return response
+
+
+def playerlistapi(request):
+    playerlist=playerInfo.objects.all()
+    data={ "Player List":list(playerlist.values())}
+    response=JsonResponse(data)
+    
+    return response
+    
+
+def playerdetailsapi(request,pk):
+    try:
+        playerdetail=playerInfo.objects.get(pk=pk)
+        data={"Player Details":{
+            "player name":playerdetail.player_name,
+            "player id":playerdetail.user_id,
+            "player pic":playerdetail.Profile_picture.url,
+            "player pass":playerdetail.password,
+
+            
+        }}
+        response=JsonResponse(data)
+        
+
+    except playerInfo.DoesNotExist:
+        response=JsonResponse({"problem":{
+            "error":404,
+            "error details":"no data"
+        }},status=404)
+    return response
+
+
+
+
+

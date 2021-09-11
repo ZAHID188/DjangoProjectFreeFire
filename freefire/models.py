@@ -16,13 +16,14 @@ UUID=uuid.uuid1(node=None,clock_seq=None)
 class Matches(models.Model):
     #gameid =models.UUIDField(default=str(uuid.uuid4), editable=False)
     #gameid=models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
+    
     Matchid=models.CharField(max_length=100, blank=True, unique=True, default=UUID.time)
     GameMood=models.CharField(max_length=120,choices=gamechoice,default="CLASSIC")
     map=models.CharField(max_length=50,choices=mapchoice,default="BERMUDA")
     ammu=models.CharField(max_length=20, choices=ammuchoice ,default="Limited")
     time=models.CharField(max_length=20, choices=gametime ,default="00PM")
     entryfee=models.FloatField(choices=entryfeechoice,default=15.0)
-    #matchnumber=models.IntegerField()
+    matchnumber=models.IntegerField()
     
     
    
@@ -36,7 +37,10 @@ class Matches(models.Model):
 
 class playerInfo(models.Model):
     player_name=models.CharField(max_length=120)
-    game_id=models.IntegerField()
+    user_id=models.IntegerField()
+    Profile_picture=models.ImageField(blank=True,null=True)
+    password=models.CharField(max_length=20)
+
 
     def __str__(self):
         return self.player_name 
